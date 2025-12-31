@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row justify-content-center">
+  <div class="col-lg-6 col-md-8 col-sm-12">
+
+    <!-- MAIN CARD -->
+    <div class="card bg-black border-secondary shadow-lg p-4">
+
+      <!-- TITLE -->
+      <h3 class="mb-2 text-center text-light fw-bold">
+        🔬 Cell Image Analysis
+      </h3>
+
+      <p class="text-secondary text-center mb-4">
+        Upload one or more microscopy images to compute
+        <span class="text-success fw-semibold">cell count</span>
+        and
+        <span class="text-success fw-semibold">confluency</span>
+        using AI-powered segmentation.
+      </p>
+
+      <!-- FORM -->
+      <form method="POST"
+            action="/upload"
+            enctype="multipart/form-data"
+            onsubmit="showLoader()">
+
+        <!-- IMAGE INPUT (BATCH ENABLED) -->
+        <div class="mb-3">
+          <label class="form-label text-light">
+            Microscopy Image(s)
+          </label>
+
+          <input type="file"
+                 class="form-control bg-dark text-light"
+                 name="images"
+                 accept="image/*"
+                 multiple
+                 required>
+
+          <small class="text-muted mt-1 d-block">
+            ✔ Single or multiple images supported (batch mode)
+          </small>
+        </div>
+
+        <!-- VIEW MODE -->
+        <div class="mb-4">
+          <label class="form-label text-light">
+            Visualization Mode
+          </label>
+
+          <select class="form-select bg-dark text-light"
+                  name="view">
+            <option value="dots">
+              🟢 Green Dots (Cell Centroids)
+            </option>
+            <option value="mask">
+              🎨 Cell Masks (Segmentation)
+            </option>
+          </select>
+        </div>
+
+        <!-- SUBMIT BUTTON -->
+        <button id="analyzeBtn"
+                class="btn btn-success w-100 fw-bold d-flex align-items-center justify-content-center gap-2">
+          🧠 Analyze Image(s)
+        </button>
+
+      </form>
+
+      <!-- LOADER -->
+      <div id="loader"
+           class="text-center mt-4 d-none">
+
+        <div class="spinner-border text-success mb-3"
+             role="status"
+             style="width: 3.5rem; height: 3.5rem;">
+        </div>
+
+        <p class="text-secondary mb-1">
+          Running AI segmentation…
+        </p>
+
+        <small class="text-muted">
+          Detecting cells & computing metrics
+        </small>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<!-- SCRIPT -->
+<script>
+function showLoader() {
+  const btn = document.getElementById("analyzeBtn");
+  btn.disabled = true;
+  btn.innerText = "Analyzing…";
+  document.getElementById("loader").classList.remove("d-none");
+}
+</script>
+
+{% endblock %}

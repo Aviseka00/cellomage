@@ -1,0 +1,165 @@
+/* ---------- GLOBAL ---------- */
+body {
+    margin: 0;
+    background: radial-gradient(circle at top, #020617, #020617);
+    color: #e5e7eb;
+    font-family: "Inter", "Segoe UI", sans-serif;
+}
+
+/* ---------- NAVBAR ---------- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 40px;
+    background: #020617;
+    border-bottom: 1px solid #1e293b;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.logo span {
+    color: #22c55e;
+}
+
+.navbar nav a {
+    margin-left: 24px;
+    color: #94a3b8;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.navbar nav a:hover {
+    color: #22c55e;
+}
+
+/* ---------- PAGE ---------- */
+.page {
+    padding: 40px 20px;
+}
+
+/* ---------- CARD ---------- */
+.card {
+    max-width: 600px;
+    margin: auto;
+    background: #0f172a;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+}
+
+.card.wide {
+    max-width: 900px;
+}
+
+.card h1 {
+    margin-top: 0;
+}
+
+.subtitle {
+    color: #94a3b8;
+    margin-bottom: 25px;
+}
+
+/* ---------- FORM ---------- */
+.file-upload {
+    display: block;
+    padding: 14px;
+    background: #020617;
+    border: 1px dashed #334155;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.file-upload input {
+    display: none;
+}
+
+.select-label {
+    display: block;
+    margin-bottom: 20px;
+    color: #cbd5f5;
+}
+
+select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    background: #020617;
+    color: #e5e7eb;
+    border-radius: 8px;
+    border: 1px solid #334155;
+}
+
+/* ---------- BUTTONS ---------- */
+.primary-btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+    color: #022c22;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.secondary-btn {
+    padding: 12px 20px;
+    background: #020617;
+    border: 1px solid #334155;
+    color: #e5e7eb;
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+/* ---------- METRICS ---------- */
+.metrics {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin: 20px 0;
+}
+
+.metric {
+    background: #020617;
+    padding: 16px 22px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.metric span {
+    display: block;
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+.metric strong {
+    font-size: 26px;
+    color: #22c55e;
+}
+
+/* ---------- IMAGE ---------- */
+.image-card {
+    max-width: 720px;
+    margin: 30px auto;
+    padding: 12px;
+    background: #020617;
+    border-radius: 16px;
+}
+
+.image-card img {
+    width: 100%;
+    border-radius: 12px;
+}
+
+/* ---------- FOOTER ---------- */
+.footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 13px;
+    color: #64748b;
+}

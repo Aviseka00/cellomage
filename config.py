@@ -1,0 +1,5 @@
+SECRET_KEY = "cellomage_secret_key"
+MONGO_URI = "mongodb://localhost:27017/cellomage"
+MODEL_PATH = "models/my_cells_v2"
+UPLOAD_FOLDER = "uploads/originals"
+RESULT_FOLDER = "results"

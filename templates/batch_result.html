@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row justify-content-center">
+  <div class="col-lg-12">
+
+    <!-- ========================= -->
+    <!-- PAGE TITLE -->
+    <!-- ========================= -->
+    <h3 class="mb-2 text-center text-light fw-bold">
+      🔬 Batch Analysis Results
+    </h3>
+
+    <p class="text-secondary text-center mb-4">
+      {{ total_images }} images processed using AI-powered cell segmentation
+    </p>
+
+    <!-- ========================= -->
+    <!-- BATCH SUMMARY BAR -->
+    <!-- ========================= -->
+    <div class="card bg-black border-secondary shadow-lg p-4 mb-5">
+
+      <h4 class="text-center text-light fw-semibold mb-4">
+        📊 Batch Summary
+      </h4>
+
+      <div class="row text-center">
+
+        <div class="col-md-3 mb-3">
+          <div class="metric-box">
+            <div class="metric-label">Images Processed</div>
+            <div class="metric-value">{{ total_images }}</div>
+          </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+          <div class="metric-box">
+            <div class="metric-label">Total Cells</div>
+            <div class="metric-value">{{ total_cells }}</div>
+          </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+          <div class="metric-box">
+            <div class="metric-label">Avg. Confluency</div>
+            <div class="metric-value">{{ avg_confluency }}%</div>
+          </div>
+        </div>
+
+        <div class="col-md-3 mb-3">
+          <div class="metric-box">
+            <div class="metric-label">Density</div>
+            <span class="badge bg-{{ density_class }} fs-5 px-3 py-2">
+              {{ density }}
+            </span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ========================= -->
+    <!-- PER-IMAGE RESULTS -->
+    <!-- ========================= -->
+    {% for item in results %}
+    <div class="card bg-black border-secondary shadow-lg p-4 mb-5">
+
+      <!-- IMAGE HEADER -->
+      <div class="mb-3 text-center">
+        <span class="badge bg-success px-3 py-2">
+          Image {{ loop.index }} / {{ results|length }}
+        </span>
+        <div class="text-muted mt-2 small">
+          {{ item.filename }}
+        </div>
+      </div>
+
+      <!-- METRICS -->
+      <div class="row text-center mb-4">
+        <div class="col-md-6 mb-3">
+          <div class="metric-box">
+            <div class="metric-label">Cell Count</div>
+            <div class="metric-value">{{ item.count }}</div>
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <div class="metric-box">
+            <div class="metric-label">Confluency</div>
+            <div class="metric-value">{{ item.confluency }}%</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- IMAGES -->
+      <div class="row text-center align-items-start">
+        <div class="col-md-6 mb-4">
+          <h6 class="text-secondary mb-2">Original Image</h6>
+          <img src="{{ item.original_image }}"
+               class="img-fluid result-img shadow">
+        </div>
+
+        <div class="col-md-6 mb-4">
+          <h6 class="text-secondary mb-2">Analyzed Output</h6>
+          <img src="{{ item.result_image }}"
+               class="img-fluid result-img shadow">
+        </div>
+      </div>
+
+    </div>
+    {% endfor %}
+
+    <!-- ========================= -->
+    <!-- FOOT ACTION -->
+    <!-- ========================= -->
+    <div class="text-center mb-5">
+      <a href="/"
+         class="btn btn-outline-success px-4 py-2 fw-semibold">
+        ⬅ Analyze More Images
+      </a>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}

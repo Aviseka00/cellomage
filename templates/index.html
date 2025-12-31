@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>cellomage.io</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>🔬 cellomage.io</h1>
+
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <input type="file" name="image" required><br><br>
+
+        <label>
+            <input type="radio" name="mode" value="dots" checked>
+            Green Dots
+        </label>
+        <label>
+            <input type="radio" name="mode" value="mask">
+            Cell Mask
+        </label><br><br>
+
+        <button type="submit">Analyze Image</button>
+    </form>
+</body>
+</html>

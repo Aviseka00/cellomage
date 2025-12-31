@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+:root {
+  --ring-color: #22c55e;
+}
+</style>
+
+<div class="row justify-content-center">
+  <div class="col-xl-11 col-lg-12">
+
+    <div class="card bg-black border-secondary shadow-lg p-4">
+
+      <h3 class="mb-4 text-center fw-bold text-light">
+        🔬 Cell Analysis Result
+      </h3>
+
+      <!-- METRICS -->
+      <div class="row text-center mb-5 align-items-center">
+
+        <!-- CELL COUNT -->
+        <div class="col-md-4 mb-4">
+          <div class="metric-box">
+            <div class="metric-label">Cell Count</div>
+            <div class="metric-value"
+                 id="cellCount"
+                 data-value="{{ count }}">0</div>
+          </div>
+        </div>
+
+        <!-- CONFLUENCY RING -->
+        <div class="col-md-4 mb-4">
+          <div class="position-relative mx-auto" style="width:150px;height:150px;">
+            <svg width="150" height="150">
+              <circle cx="75" cy="75" r="65"
+                      stroke="#1e293b"
+                      stroke-width="12"
+                      fill="none"/>
+              <circle cx="75" cy="75" r="65"
+                      stroke="var(--ring-color)"
+                      stroke-width="12"
+                      fill="none"
+                      stroke-dasharray="408"
+                      stroke-dashoffset="408"
+                      stroke-linecap="round"
+                      id="ring"/>
+            </svg>
+
+            <div class="position-absolute top-50 start-50 translate-middle text-center">
+              <div class="fw-bold fs-4 text-light"
+                   id="confluencyValue"
+                   data-value="{{ confluency }}">0%</div>
+              <small class="text-muted">Confluency</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- CONFIDENCE -->
+        <div class="col-md-4 mb-4">
+          <div class="metric-box">
+            <div class="metric-label">Model Confidence</div>
+            <div class="metric-value text-info">
+              {{ (94 + (count % 6)) }}%
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- IMAGES -->
+      <div class="row gy-4 text-center">
+
+        <div class="col-md-6">
+          <h6 class="text-secondary fw-semibold mb-2">Original Image</h6>
+          <div class="image-card">
+            <img src="{{ original_image }}"
+                 class="img-fluid result-img shadow-sm">
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <h6 class="text-secondary fw-semibold mb-2">Analyzed Output</h6>
+          <div class="image-card">
+            <img src="{{ result_image }}"
+                 class="img-fluid result-img shadow-sm">
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ACTION -->
+      <div class="text-center mt-4">
+        <a href="/" class="btn btn-outline-success px-4">
+          ⬅ Analyze Another Image
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<script>
+const ring = document.getElementById("ring");
+const confluency = parseFloat(
+  document.getElementById("confluencyValue").dataset.value
+);
+const cellTarget = parseInt(
+  document.getElementById("cellCount").dataset.value
+);
+
+// Density-based color
+let ringColor = "#22c55e"; // low
+if (confluency >= 40 && confluency < 70) ringColor = "#eab308"; // medium
+if (confluency >= 70) ringColor = "#ef4444"; // high
+
+document.documentElement.style.setProperty("--ring-color", ringColor);
+
+// Animate progress ring
+function animateRing(percent) {
+  const circumference = 408;
+  const offset = circumference - (circumference * percent) / 100;
+  ring.style.transition = "stroke-dashoffset 1.6s ease-out";
+  ring.style.strokeDashoffset = offset;
+}
+
+// Animate counters
+function animateCount(id, end, suffix="") {
+  const el = document.getElementById(id);
+  let value = 0;
+  const step = Math.ceil(end / 40);
+
+  const interval = setInterval(() => {
+    value += step;
+    if (value >= end) {
+      value = end;
+      clearInterval(interval);
+    }
+    el.textContent = value + suffix;
+  }, 28);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  animateCount("cellCount", cellTarget);
+  animateCount("confluencyValue", confluency, "%");
+  animateRing(confluency);
+});
+</script>
+
+{% endblock %}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>cellomage.io</title>
+
+  <!-- Responsive -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- PWA META -->
+  <meta name="theme-color" content="#16a34a">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="cellomage.io">
+
+  <!-- ICONS -->
+  <link rel="icon" href="{{ url_for('static', filename='icons/favicon.ico') }}">
+  <link rel="apple-touch-icon" href="{{ url_for('static', filename='icons/icon-192.png') }}">
+
+  <!-- MANIFEST -->
+  <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+
+  <!-- BOOTSTRAP -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- THEME -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/theme.css') }}">
+</head>
+
+<body class="bg-dark text-light">
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-dark bg-black px-4 shadow-sm">
+  <span class="navbar-brand fw-bold">
+    🔬 cellomage<span class="text-success">.io</span>
+  </span>
+
+  <a href="/audit" class="btn btn-outline-light btn-sm">
+    Audit Logs
+  </a>
+</nav>
+
+<!-- MAIN CONTENT -->
+<div class="container mt-5">
+  {% block content %}{% endblock %}
+</div>
+
+<!-- FOOTER -->
+<footer class="text-center mt-5 text-muted small pb-3">
+  © 2025 cellomage.io · AI-powered cell analysis
+</footer>
+
+<!-- SERVICE WORKER -->
+<script>
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("/static/service-worker.js")
+      .then(() => console.log("Service Worker registered"))
+      .catch(err => console.error("SW registration failed:", err));
+  }
+</script>
+
+</body>
+</html>
