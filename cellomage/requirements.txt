@@ -1,7 +1,0 @@
-flask
-flask-pymongo
-cellpose
-numpy
-opencv-python
-scikit-image
-matplotlib
